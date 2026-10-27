@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus AI | Intelligent Studio</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo-icon">✦</div>
+        <div class="brand-info">
+          <h1>Nexus AI</h1>
+          <span>Studio Edition</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <label class="section-label">SELECT PERSONA</label>
+        <div class="persona-picker" id="persona-picker">
+          {% for key, p in personas.items() %}
+          <button class="persona-card {% if key == 'assistant' %}active{% endif %}" data-persona="{{ key }}">
+            <div class="persona-header">
+              <span class="p-name">{{ p.name }}</span>
+              <span class="p-badge">{{ key|capitalize }}</span>
+            </div>
+            <p class="p-desc">{{ p.tagline }}</p>
+          </button>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <button id="btn-export" class="secondary-btn">Export Chat</button>
+        <button id="btn-clear" class="danger-btn">Clear History</button>
+      </div>
+    </aside>
+
+    <main class="chat-main">
+      <header class="chat-header">
+        <div class="active-profile">
+          <span class="status-indicator"></span>
+          <div>
+            <h2 id="active-persona-name">Nova</h2>
+            <p id="active-persona-role">General Intelligence Assistant</p>
+          </div>
+        </div>
+        <div class="quick-actions">
+          <span class="chip" data-prompt="Explain asynchronous Python with an example">Async Python</span>
+          <span class="chip" data-prompt="Calculate 42 * (18 / 3.5)">Quick Math</span>
+          <span class="chip" data-prompt="Analyze trade-offs of microservices vs modular monolith">Arch Trade-offs</span>
+        </div>
+      </header>
+
+      <div class="chat-scroll" id="chat-container">
+        <div class="message-bubble bot">
+          <div class="bubble-avatar">✦</div>
+          <div class="bubble-body">
+            <div class="bubble-meta">Nexus AI • Just now</div>
+            <div class="bubble-text">Welcome! Select a persona or ask anything to get started.</div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="input-tray">
+        <form id="chat-form" class="input-container">
+          <textarea id="user-input" placeholder="Message Nexus AI... (Press Shift+Enter for newline, Enter to send)" rows="1" required></textarea>
+          <button type="submit" id="send-btn" aria-label="Send message">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </form>
+      </footer>
+    </main>
+  </div>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
